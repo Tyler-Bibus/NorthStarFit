@@ -6,12 +6,67 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/ChExcersise"
-        android:layout_width="88dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/tvExcersise"
+        android:layout_width="89dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="28dp"
         android:text="Exercise"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btSubmitExcercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Set Complete"
+        app:layout_constraintBottom_toBottomOf="@+id/spExcercise"
+        app:layout_constraintStart_toEndOf="@+id/spExcercise"
+        app:layout_constraintTop_toTopOf="@+id/spExcercise" />
+
+    <Spinner
+        android:id="@+id/spExcercise"
+        android:layout_width="93dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="30dp"
+        android:entries="@array/movements"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/tvExcersise"
+        app:layout_constraintStart_toEndOf="@+id/tvExcersise"
+        app:layout_constraintTop_toTopOf="@+id/tvExcersise" />
+
+    <TextView
+        android:id="@+id/tvSetsCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Sets: 19"
+        app:layout_constraintStart_toStartOf="@+id/tvExcersise"
+        app:layout_constraintTop_toBottomOf="@+id/tvExcersise" />
+
+    <EditText
+        android:id="@+id/etWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Weight (lbs)"
+        android:inputType="numberDecimal"
+        android:textColorHint="#B3B2B2"
+        app:layout_constraintStart_toEndOf="@+id/tvExcersise"
+        app:layout_constraintTop_toBottomOf="@+id/spExcercise" />
+
+    <TextView
+        android:id="@+id/tvTotalVolume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSetsCompleted"
+        app:layout_constraintStart_toEndOf="@+id/tvSetsCompleted"
+        app:layout_constraintTop_toTopOf="@+id/tvSetsCompleted"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
