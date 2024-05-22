@@ -1,8 +1,6 @@
 package com.northstarfit
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -11,7 +9,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 
-class WorkoutActivity : ComponentActivity() {
+open class WorkoutActivity : ComponentActivity() {
     private lateinit var btSubmit: Button
     private lateinit var tvTotalSets: TextView
     private lateinit var spExcercise: Spinner
@@ -20,19 +18,28 @@ class WorkoutActivity : ComponentActivity() {
     private lateinit var etReps: EditText
     private lateinit var tvTotalReps: TextView
     private lateinit var linearLayout: LinearLayout
+    private lateinit var btAddMovement: Button
     private var setsCompleted = 0
     private var totalVolume = 0.0
     private var totalReps = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_workout)
+        linearLayout = findViewById(R.id.linLayMainLayout)
+        var thisWorkout = Workout(linearLayout)
+        var currMovement = thisWorkout.newMovement("bruh")
 
+        btAddMovement = findViewById(R.id.btAddMovement)
         btSubmit = findViewById(R.id.btSubmitExcercise)
         tvTotalSets = findViewById(R.id.tvSetsCompleted)
         etWeight = findViewById(R.id.etWeight)
         tvVolume = findViewById(R.id.tvTotalVolume)
         etReps = findViewById(R.id.etReps)
         tvTotalReps = findViewById(R.id.tvTotalReps)
+        spExcercise = findViewById(R.id.spExcercise)
+
+
+        /*
         val jazz = ArrayList<Movement>()
         setWeights()
         val benchPress = Movement("Bench Press")
@@ -44,17 +51,26 @@ class WorkoutActivity : ComponentActivity() {
             Log.d("MainActivity", m.toString() + ": Current Movements")
         }
         benchPress.removeSet(benchSets[0])
-
-        //This is layout testing
-        linearLayout = findViewById(R.id.linLayMainLayout)
+        */
 
 
+
+        btAddMovement.setOnClickListener{
+            var newMovement = Movement(spExcercise.selectedItem.toString(), linearLayout)
+            Log.d("WorkoutActivity", newMovement.toString())
+            currMovement = newMovement
+        }
 
         btSubmit.setOnClickListener{
             Log.d("MainActivity", "Workout Submitted")
-            var newButton = TextView(this)
-        }
+            setWeights()
+            if (etWeight.text.isEmpty()){
+                currMovement.addSet(0.0)
+                return@setOnClickListener
+            }
+            currMovement.addSet(etWeight.text.toString().toDouble())
 
+        }
     }
 
     private fun setWeights() {

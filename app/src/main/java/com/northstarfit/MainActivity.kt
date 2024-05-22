@@ -17,7 +17,7 @@ import kotlinx.coroutines.android.awaitFrame
 
 class MainActivity : ComponentActivity() {
 
-    lateinit var btWorkout: Button
+    private lateinit var btWorkout: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_layout)

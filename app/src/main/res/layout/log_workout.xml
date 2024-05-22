@@ -93,11 +93,20 @@
 
     <LinearLayout
         android:id="@+id/linLayMainLayout"
-        android:layout_width="409dp"
-        android:layout_height="532dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="411dp"
+        android:layout_height="367dp"
+        android:layout_marginTop="164dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalVolume"
-        tools:layout_editor_absoluteX="1dp"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalVolume"></LinearLayout>
+
+    <Button
+        android:id="@+id/btAddMovement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Add Mvmt"
+        app:layout_constraintStart_toEndOf="@+id/tvTotalReps"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalReps" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
