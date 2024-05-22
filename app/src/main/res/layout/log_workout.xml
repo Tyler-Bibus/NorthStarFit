@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/etReps"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:hint="Reps"
+        android:inputType="number"
+        android:textColorHint="#B3B2B2"
+        app:layout_constraintStart_toEndOf="@+id/etWeight"
+        app:layout_constraintTop_toTopOf="@+id/etWeight" />
+
     <TextView
         android:id="@+id/tvExcersise"
         android:layout_width="89dp"
@@ -48,14 +60,14 @@
 
     <EditText
         android:id="@+id/etWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Weight (lbs)"
         android:inputType="numberDecimal"
         android:textColorHint="#B3B2B2"
-        app:layout_constraintStart_toEndOf="@+id/tvExcersise"
+        app:layout_constraintStart_toStartOf="@+id/tvExcersise"
         app:layout_constraintTop_toBottomOf="@+id/spExcercise" />
 
     <TextView
@@ -68,5 +80,15 @@
         app:layout_constraintStart_toEndOf="@+id/tvSetsCompleted"
         app:layout_constraintTop_toTopOf="@+id/tvSetsCompleted"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvTotalReps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTotalVolume"
+        app:layout_constraintStart_toEndOf="@+id/tvTotalVolume"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalVolume" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
