@@ -1,6 +1,5 @@
 package com.northstarfit
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -11,26 +10,8 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import com.northstarfit.Movement
-import kotlinx.coroutines.android.awaitFrame
 
-
-class MainActivity : ComponentActivity() {
-
-    lateinit var btWorkout: Button
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_layout)
-
-        btWorkout = findViewById(R.id.btStartWorkout)
-        btWorkout.setOnClickListener{
-            val intent = Intent(this, WorkoutActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    /*
-     * This is the old starter class, attempting to do different Views
+class WorkoutActivity : ComponentActivity() {
     private lateinit var btSubmit: Button
     private lateinit var tvTotalSets: TextView
     private lateinit var spExcercise: Spinner
@@ -45,9 +26,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_workout)
-
-
-
 
         btSubmit = findViewById(R.id.btSubmitExcercise)
         tvTotalSets = findViewById(R.id.tvSetsCompleted)
@@ -93,6 +71,4 @@ class MainActivity : ComponentActivity() {
         tvVolume.text = "Volume: " + "%.2f".format(totalVolume)
         tvTotalReps.text = "Reps: " + totalReps.toString()
     }
-*/
-
 }
