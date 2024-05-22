@@ -91,22 +91,29 @@
         app:layout_constraintStart_toEndOf="@+id/tvTotalVolume"
         app:layout_constraintTop_toTopOf="@+id/tvTotalVolume" />
 
-    <LinearLayout
-        android:id="@+id/linLayMainLayout"
-        android:layout_width="411dp"
-        android:layout_height="367dp"
-        android:layout_marginTop="164dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalVolume"></LinearLayout>
-
     <Button
         android:id="@+id/btAddMovement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Add Mvmt"
-        app:layout_constraintStart_toEndOf="@+id/tvTotalReps"
+        app:layout_constraintStart_toEndOf="@+id/spExcercise"
         app:layout_constraintTop_toBottomOf="@+id/tvTotalReps" />
+
+    <ScrollView
+        android:id="@+id/svSets"
+        android:layout_width="410dp"
+        android:layout_height="382dp"
+        android:layout_marginTop="348dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

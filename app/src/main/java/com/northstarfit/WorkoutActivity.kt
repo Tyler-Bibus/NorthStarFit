@@ -5,9 +5,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.core.view.isVisible
 
 open class WorkoutActivity : ComponentActivity() {
     private lateinit var btSubmit: Button
@@ -19,13 +21,19 @@ open class WorkoutActivity : ComponentActivity() {
     private lateinit var tvTotalReps: TextView
     private lateinit var linearLayout: LinearLayout
     private lateinit var btAddMovement: Button
+    private lateinit var svSets: ScrollView
     private var setsCompleted = 0
     private var totalVolume = 0.0
     private var totalReps = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.log_workout)
-        linearLayout = findViewById(R.id.linLayMainLayout)
+        svSets = findViewById(R.id.svSets)
+        linearLayout = LinearLayout(this)
+        linearLayout.orientation = LinearLayout.VERTICAL
+        svSets.removeAllViews()
+        svSets.addView(linearLayout)
+        svSets.isVisible = true
         var thisWorkout = Workout(linearLayout)
         var currMovement = thisWorkout.newMovement("bruh")
 
@@ -37,7 +45,7 @@ open class WorkoutActivity : ComponentActivity() {
         etReps = findViewById(R.id.etReps)
         tvTotalReps = findViewById(R.id.tvTotalReps)
         spExcercise = findViewById(R.id.spExcercise)
-
+        setWeights()
 
         /*
         val jazz = ArrayList<Movement>()
@@ -64,17 +72,17 @@ open class WorkoutActivity : ComponentActivity() {
         btSubmit.setOnClickListener{
             Log.d("MainActivity", "Workout Submitted")
             setWeights()
-            if (etWeight.text.isEmpty()){
-                currMovement.addSet(0.0)
+            if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
+                currMovement.addSet(0.0, 0)
                 return@setOnClickListener
             }
-            currMovement.addSet(etWeight.text.toString().toDouble())
+            currMovement.addSet(etWeight.text.toString().toDouble(), etReps.text.toString().toInt())
 
         }
     }
 
     private fun setWeights() {
-        if (etWeight.text.isEmpty()){
+        if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
             tvTotalSets.text = "Sets: " + setsCompleted.toString()
             tvVolume.text = "Volume: " + totalVolume.toString()
             tvTotalReps.text = "Reps: " + totalReps.toString()

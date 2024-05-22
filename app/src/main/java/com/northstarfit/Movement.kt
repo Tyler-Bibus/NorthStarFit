@@ -25,8 +25,8 @@ open class Movement (type: String, linLay: LinearLayout) : Workout(linLay){
         excercise = x
     }
 
-    fun addSet(weight: Double){
-        val newSet = Set(weight, excercise, this.getLinearLayout())
+    fun addSet(weight: Double, reps: Int){
+        val newSet = Set(weight, reps, excercise, this.getLinearLayout())
         sets.add(newSet)
         newSet.addSetToView()
     }
