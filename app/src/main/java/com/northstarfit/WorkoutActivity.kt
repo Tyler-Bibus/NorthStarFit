@@ -1,5 +1,6 @@
 package com.northstarfit
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -21,6 +22,7 @@ open class WorkoutActivity : ComponentActivity() {
     private lateinit var tvTotalReps: TextView
     private lateinit var linearLayout: LinearLayout
     private lateinit var btAddMovement: Button
+    private lateinit var btEndWorkout: Button
     private lateinit var svSets: ScrollView
     private var setsCompleted = 0
     private var totalVolume = 0.0
@@ -34,7 +36,7 @@ open class WorkoutActivity : ComponentActivity() {
         svSets.removeAllViews()
         svSets.addView(linearLayout)
         svSets.isVisible = true
-        var thisWorkout = Workout(linearLayout)
+        val thisWorkout = Workout(linearLayout)
         var currMovement = thisWorkout.newMovement("bruh")
 
         btAddMovement = findViewById(R.id.btAddMovement)
@@ -45,26 +47,11 @@ open class WorkoutActivity : ComponentActivity() {
         etReps = findViewById(R.id.etReps)
         tvTotalReps = findViewById(R.id.tvTotalReps)
         spExcercise = findViewById(R.id.spExcercise)
+        btEndWorkout = findViewById(R.id.btEndWorkout)
         setWeights()
-
-        /*
-        val jazz = ArrayList<Movement>()
-        setWeights()
-        val benchPress = Movement("Bench Press")
-        benchPress.addSet(10)
-        val benchSets = benchPress.getSets()
-        benchSets.get(0).changeWeight(100)
-        jazz.add(benchPress)
-        for(m : Movement in jazz){
-            Log.d("MainActivity", m.toString() + ": Current Movements")
-        }
-        benchPress.removeSet(benchSets[0])
-        */
-
-
 
         btAddMovement.setOnClickListener{
-            var newMovement = Movement(spExcercise.selectedItem.toString(), linearLayout)
+            val newMovement = Movement(spExcercise.selectedItem.toString(), linearLayout)
             Log.d("WorkoutActivity", newMovement.toString())
             currMovement = newMovement
         }
@@ -77,7 +64,12 @@ open class WorkoutActivity : ComponentActivity() {
                 return@setOnClickListener
             }
             currMovement.addSet(etWeight.text.toString().toDouble(), etReps.text.toString().toInt())
+        }
 
+        btEndWorkout.setOnClickListener{
+            //TODO save this workout somewhere...
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

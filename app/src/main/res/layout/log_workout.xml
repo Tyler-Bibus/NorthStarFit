@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="Add Mvmt"
-        app:layout_constraintStart_toEndOf="@+id/spExcercise"
+        app:layout_constraintStart_toStartOf="@+id/etWeight"
         app:layout_constraintTop_toBottomOf="@+id/tvTotalReps" />
 
     <ScrollView
@@ -115,5 +115,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
+    <Button
+        android:id="@+id/btEndWorkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="End Workout"
+        app:layout_constraintStart_toEndOf="@+id/btAddMovement"
+        app:layout_constraintTop_toTopOf="@+id/btAddMovement" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
