@@ -18,14 +18,22 @@ import kotlinx.coroutines.android.awaitFrame
 class MainActivity : ComponentActivity() {
 
     private lateinit var btWorkout: Button
+    private lateinit var btFoodLog: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_layout)
 
         btWorkout = findViewById(R.id.btStartWorkout)
+        btFoodLog = findViewById(R.id.btFoodLog)
+
         btWorkout.setOnClickListener{
-            val intent = Intent(this, WorkoutActivity::class.java)
-            startActivity(intent)
+            val workoutIntent = Intent(this, WorkoutActivity::class.java)
+            startActivity(workoutIntent)
+        }
+
+        btFoodLog.setOnClickListener{
+            val foodIntent = Intent(this, FoodLogActivity::class.java)
+            startActivity(foodIntent)
         }
     }
 }

@@ -42,7 +42,7 @@ open class WorkoutActivity : ComponentActivity() {
         tvTotalReps = findViewById(R.id.tvTotalReps)
         spExcercise = findViewById(R.id.spExcercise)
         btEndWorkout = findViewById(R.id.btEndWorkout)
-        //TODO setWeights()
+
 
         btAddMovement.setOnClickListener{
             val newMovement = thisWorkout.newMovement(spExcercise.selectedItem.toString())
@@ -57,7 +57,8 @@ open class WorkoutActivity : ComponentActivity() {
         }
     }
 
-    /** TODO Fix OOP and set up so we can calculate everything
+    /**
+     * outdated setWeights Method TODO: Delete
     private fun setWeights() {
         if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
             tvTotalSets.text = "Sets: " + setsCompleted.toString()

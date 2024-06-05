@@ -62,9 +62,9 @@ open class Workout(activity: WorkoutActivity, linLay: LinearLayout) {
                 totalSets++
                 totalWeight += set.getWeight()
                 totalReps += set.getReps()
+                totalVolume += set.getReps() * set.getWeight()
             }
         }
-        totalVolume = totalWeight * totalReps
         thisActivity.setWeights(totalSets, totalReps, totalVolume)
     }
 
