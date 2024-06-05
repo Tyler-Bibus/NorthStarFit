@@ -1,18 +1,18 @@
 package com.northstarfit
 
-import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
 
-class Set (Weight: Double, reps: Int, type: String, linLay: LinearLayout) : Movement(type, linLay) {
+class Set(linLay: LinearLayout, currentMovement: Movement){
     private var currentWeight = 0.0
     private var currentReps = 0
-
+    private lateinit var lay: LinearLayout
+    private lateinit var movement: Movement
+    private lateinit var setView: SetView
 
     init {
-        currentWeight = Weight
-        currentReps = reps
-        this.setExcercise(type)
+        lay = linLay
+        movement = currentMovement
     }
 
     fun changeWeight(weightNew: Double){
@@ -25,12 +25,6 @@ class Set (Weight: Double, reps: Int, type: String, linLay: LinearLayout) : Move
         currentReps = newReps
     }
 
-
-    override fun completeSet() {
-        this.addVolume(currentWeight * currentReps)
-        super.completeSet()
-    }
-
     fun getReps(): Int {
         return currentReps
     }
@@ -39,7 +33,22 @@ class Set (Weight: Double, reps: Int, type: String, linLay: LinearLayout) : Move
         return currentWeight
     }
 
+    fun getLinearLayout(): LinearLayout{
+        return lay
+    }
+    fun getMovement(): Movement{
+        return movement
+    }
+
     fun addSetToView(){
-        SetView(this, this.getLinearLayout().context, null)
+       setView = SetView(this, lay.context, null)
+    }
+
+    fun removeFromView(){
+        setView.deleteSetFromView()
+    }
+
+    override fun toString(): String {
+        return movement.toString()
     }
 }

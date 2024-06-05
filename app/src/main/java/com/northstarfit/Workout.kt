@@ -38,5 +38,9 @@ open class Workout(linLay: LinearLayout) : WorkoutActivity() {
         return newMovement
     }
 
+    fun removeMovement(movement: Movement){
+        excercises.remove(movement)
+    }
+
 
 }

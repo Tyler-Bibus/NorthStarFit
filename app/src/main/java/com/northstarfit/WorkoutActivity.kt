@@ -13,12 +13,9 @@ import androidx.activity.ComponentActivity
 import androidx.core.view.isVisible
 
 open class WorkoutActivity : ComponentActivity() {
-    private lateinit var btSubmit: Button
     private lateinit var tvTotalSets: TextView
     private lateinit var spExcercise: Spinner
-    private lateinit var etWeight: EditText
     private lateinit var tvVolume: TextView
-    private lateinit var etReps: EditText
     private lateinit var tvTotalReps: TextView
     private lateinit var linearLayout: LinearLayout
     private lateinit var btAddMovement: Button
@@ -37,33 +34,20 @@ open class WorkoutActivity : ComponentActivity() {
         svSets.addView(linearLayout)
         svSets.isVisible = true
         val thisWorkout = Workout(linearLayout)
-        var currMovement = thisWorkout.newMovement("bruh")
+        var currMovement: Movement
 
         btAddMovement = findViewById(R.id.btAddMovement)
-        btSubmit = findViewById(R.id.btSubmitExcercise)
         tvTotalSets = findViewById(R.id.tvSetsCompleted)
-        etWeight = findViewById(R.id.etWeight)
         tvVolume = findViewById(R.id.tvTotalVolume)
-        etReps = findViewById(R.id.etReps)
         tvTotalReps = findViewById(R.id.tvTotalReps)
         spExcercise = findViewById(R.id.spExcercise)
         btEndWorkout = findViewById(R.id.btEndWorkout)
-        setWeights()
+        //TODO setWeights()
 
         btAddMovement.setOnClickListener{
-            val newMovement = Movement(spExcercise.selectedItem.toString(), linearLayout)
+            val newMovement = thisWorkout.newMovement(spExcercise.selectedItem.toString())
             Log.d("WorkoutActivity", newMovement.toString())
             currMovement = newMovement
-        }
-
-        btSubmit.setOnClickListener{
-            Log.d("MainActivity", "Workout Submitted")
-            setWeights()
-            if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
-                currMovement.addSet(0.0, 0)
-                return@setOnClickListener
-            }
-            currMovement.addSet(etWeight.text.toString().toDouble(), etReps.text.toString().toInt())
         }
 
         btEndWorkout.setOnClickListener{
@@ -73,6 +57,7 @@ open class WorkoutActivity : ComponentActivity() {
         }
     }
 
+    /** TODO Fix OOP and set up so we can calculate everything
     private fun setWeights() {
         if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
             tvTotalSets.text = "Sets: " + setsCompleted.toString()
@@ -87,4 +72,5 @@ open class WorkoutActivity : ComponentActivity() {
         tvVolume.text = "Volume: " + "%.2f".format(totalVolume)
         tvTotalReps.text = "Reps: " + totalReps.toString()
     }
+    */
 }

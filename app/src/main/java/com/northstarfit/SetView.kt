@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 
 class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context, attrs){
@@ -15,12 +16,15 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
     private lateinit var etSetWeight: EditText
     private lateinit var etSetReps: EditText
     private lateinit var btDeleteSet: ImageButton
+    private lateinit var linearLayout: LinearLayout
+    private var thisSet: Set
+    private val view: View
 
     init {
         val inflater = LayoutInflater.from(this.context)
-        val view = inflater.inflate(R.layout.set_layout, null, false)
-
-        var linearLayout = set.getLinearLayout()
+        view = inflater.inflate(R.layout.set_layout, null, false)
+        thisSet = set
+        linearLayout = set.getLinearLayout()
         var excercise = set.toString()
         tvExcercise = view.findViewById(R.id.tvExcercise)
         tvExcercise.text = excercise
@@ -33,8 +37,12 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
 
         btDeleteSet.setOnClickListener{
             linearLayout.removeView(view)
-            set.removeSet(set)
+            set.getMovement().removeSet(set)
         }
+    }
+
+    fun deleteSetFromView(){
+        linearLayout.removeView(view)
     }
 
 

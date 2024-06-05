@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_movementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bench Press"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llSetContainer"
+        android:layout_width="408dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/tv_movementName"
+        app:layout_constraintTop_toBottomOf="@+id/ivMovementPic">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivMovementPic"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/secured_fitness_logo"
+        app:layout_constraintStart_toEndOf="@+id/tv_movementName"
+        app:layout_constraintTop_toTopOf="@+id/tv_movementName" />
+
+    <ImageButton
+        android:id="@+id/btDeleteMovement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:src="@android:drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/btAddSet"
+        app:layout_constraintStart_toEndOf="@+id/btAddSet"
+        app:layout_constraintTop_toTopOf="@+id/btAddSet"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/btAddSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMovementPic"
+        app:layout_constraintStart_toEndOf="@+id/ivMovementPic"
+        app:layout_constraintTop_toTopOf="@+id/ivMovementPic" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
