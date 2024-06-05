@@ -20,6 +20,7 @@ open class Movement (workout: Workout, type: String, linLay: LinearLayout) {
         sets = ArrayList<Set>()
         thisWorkout = workout
         linearLayout = linLay
+        linearLayout.orientation = LinearLayout.VERTICAL
         MovementVeiw(this, linLay.context, null)
     }
 
