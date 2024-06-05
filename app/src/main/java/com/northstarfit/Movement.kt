@@ -8,15 +8,19 @@ import android.widget.LinearLayout
  * subclass of Workout
  * Contains the current sets and type of lift
  */
-open class Movement (type: String, linLay: LinearLayout) : Workout(linLay) {
+open class Movement (workout: Workout, type: String, linLay: LinearLayout) {
     private var excercise: String
     private var sets: ArrayList<Set>
+    private lateinit var thisWorkout: Workout
+    private var linearLayout: LinearLayout
 
     init{
         Log.d("Movement", "New Movement Created")
         excercise = type
         sets = ArrayList<Set>()
-        MovementVeiw(this, this.getLinearLayout().context, null)
+        thisWorkout = workout
+        linearLayout = linLay
+        MovementVeiw(this, linLay.context, null)
     }
 
 
@@ -43,6 +47,14 @@ open class Movement (type: String, linLay: LinearLayout) : Workout(linLay) {
 
     fun getSets(): ArrayList<Set> {
         return sets
+    }
+
+    fun getWorkout(): Workout{
+        return thisWorkout
+    }
+
+    fun getLinearLayout(): LinearLayout{
+        return linearLayout
     }
 
 

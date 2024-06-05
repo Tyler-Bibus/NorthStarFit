@@ -33,7 +33,7 @@ open class WorkoutActivity : ComponentActivity() {
         svSets.removeAllViews()
         svSets.addView(linearLayout)
         svSets.isVisible = true
-        val thisWorkout = Workout(linearLayout)
+        val thisWorkout = Workout(this, linearLayout)
         var currMovement: Movement
 
         btAddMovement = findViewById(R.id.btAddMovement)
@@ -73,4 +73,10 @@ open class WorkoutActivity : ComponentActivity() {
         tvTotalReps.text = "Reps: " + totalReps.toString()
     }
     */
+
+    fun setWeights(totalSets: Int, totalReps: Int, totalVolume: Double){
+        tvVolume.text = "Volume: " + "%.2f".format(totalVolume)
+        tvTotalReps.text = "Reps: " + totalReps.toString()
+        tvTotalSets.text = "Sets: " + totalSets.toString()
+    }
 }

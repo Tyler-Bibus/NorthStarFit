@@ -15,14 +15,16 @@ class Set(linLay: LinearLayout, currentMovement: Movement){
         movement = currentMovement
     }
 
-    fun changeWeight(weightNew: Double){
+    fun setWeight(weightNew: Double){
         Log.d("Movement", "Weight Changed")
         currentWeight = weightNew
+        calculateTotals()
     }
 
-    fun changeReps(newReps: Int){
+    fun setReps(newReps: Int){
         Log.d("Set", "Reps Changed")
         currentReps = newReps
+        calculateTotals()
     }
 
     fun getReps(): Int {
@@ -50,5 +52,9 @@ class Set(linLay: LinearLayout, currentMovement: Movement){
 
     override fun toString(): String {
         return movement.toString()
+    }
+
+    private fun calculateTotals(){
+        this.getMovement().getWorkout().calculateAndSet()
     }
 }
