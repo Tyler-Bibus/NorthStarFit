@@ -35,6 +35,7 @@ class MovementVeiw (movement: Movement, context: Context, attrs: AttributeSet?) 
 
         linearLayout.addView(view)
 
+        //Removes movement
         btDeleteMovement.setOnClickListener{
             linearLayout.removeView(view)
             Log.d("MovementView", "Removing Movement")
@@ -42,6 +43,7 @@ class MovementVeiw (movement: Movement, context: Context, attrs: AttributeSet?) 
             movement.getWorkout().removeMovement(movement)
         }
 
+        //adds set
         btAddSet.setOnClickListener{
             thisMovement.addSet(subLinearLayout)
         }

@@ -12,6 +12,10 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.view.isVisible
 
+/**
+ * This class is the overall WorkoutActivity that holds all the movements
+ * @author Tyler Bibus
+ */
 open class WorkoutActivity : ComponentActivity() {
     private lateinit var tvTotalSets: TextView
     private lateinit var spExcercise: Spinner
@@ -44,12 +48,14 @@ open class WorkoutActivity : ComponentActivity() {
         btEndWorkout = findViewById(R.id.btEndWorkout)
 
 
+        //This button will create a new workout/movement set
         btAddMovement.setOnClickListener{
             val newMovement = thisWorkout.newMovement(spExcercise.selectedItem.toString())
             Log.d("WorkoutActivity", newMovement.toString())
             currMovement = newMovement
         }
 
+        //This button will end the workout
         btEndWorkout.setOnClickListener{
             //TODO save this workout somewhere...
             val intent = Intent(this, MainActivity::class.java)
@@ -57,24 +63,11 @@ open class WorkoutActivity : ComponentActivity() {
         }
     }
 
-    /**
-     * outdated setWeights Method TODO: Delete
-    private fun setWeights() {
-        if (etWeight.text.isEmpty() || etReps.text.isEmpty()){
-            tvTotalSets.text = "Sets: " + setsCompleted.toString()
-            tvVolume.text = "Volume: " + totalVolume.toString()
-            tvTotalReps.text = "Reps: " + totalReps.toString()
-            return
-        }
-        setsCompleted++
-        totalReps += etReps.text.toString().toInt()
-        totalVolume += etWeight.text.toString().toDouble() * etReps.text.toString().toInt()
-        tvTotalSets.text = "Sets: " + setsCompleted.toString()
-        tvVolume.text = "Volume: " + "%.2f".format(totalVolume)
-        tvTotalReps.text = "Reps: " + totalReps.toString()
-    }
-    */
-
+    /** This function will set the weights on the display
+     * @param totalSets
+     * @param totalReps
+     * @param totalVolume
+     */
     fun setWeights(totalSets: Int, totalReps: Int, totalVolume: Double){
         tvVolume.text = "Volume: " + "%.2f".format(totalVolume)
         tvTotalReps.text = "Reps: " + totalReps.toString()

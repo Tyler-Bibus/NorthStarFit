@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -27,9 +26,9 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
         view = inflater.inflate(R.layout.set_layout, null, false)
         thisSet = set
         linearLayout = set.getLinearLayout()
-        var excercise = set.toString()
+        val exercise = set.toString()
         tvExcercise = view.findViewById(R.id.tvExcercise)
-        tvExcercise.text = excercise
+        tvExcercise.text = exercise
         etSetWeight = view.findViewById(R.id.etSetWeight)
         etSetReps = view.findViewById(R.id.etSetReps)
         btDeleteSet = view.findViewById(R.id.btDeleteSet)
@@ -39,6 +38,8 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
             linearLayout.removeView(view)
             set.getMovement().removeSet(set)
         }
+
+        //Listener if the weights get changed
         etSetWeight.addTextChangedListener( object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -54,6 +55,7 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
 
         })
 
+        //If the reps get updated
         etSetReps.addTextChangedListener( object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -72,6 +74,9 @@ class SetView (set: Set, context: Context, attrs: AttributeSet?)  : View(context
 
     }
 
+    /**
+     * Removes the current set from view
+     */
     fun deleteSetFromView(){
         linearLayout.removeView(view)
     }
