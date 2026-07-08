@@ -2,10 +2,17 @@ package com.northstarfit.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// North-star inspired palette: deep night blue with a gold accent.
+val NavyPrimary = Color(0xFF1B3A6B)
+val NavyOnPrimary = Color(0xFFFFFFFF)
+val GoldSecondary = Color(0xFFC9A227)
+val GoldOnSecondary = Color(0xFF241A00)
+val NightSurface = Color(0xFF11141A)
+val NightOnSurface = Color(0xFFE2E2E9)
+val DaySurface = Color(0xFFFAF9FD)
+val DayOnSurface = Color(0xFF1A1C20)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val NavyPrimaryDark = Color(0xFFAAC7FF)
+val NavyOnPrimaryDark = Color(0xFF0A305F)
+val GoldSecondaryDark = Color(0xFFE8C349)
+val GoldOnSecondaryDark = Color(0xFF3B2F00)

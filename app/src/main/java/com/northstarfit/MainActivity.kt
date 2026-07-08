@@ -1,48 +1,53 @@
 package com.northstarfit
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.activity.ComponentActivity
-import com.northstarfit.Movement
-import kotlinx.coroutines.android.awaitFrame
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.northstarfit.ui.history.HistoryScreen
+import com.northstarfit.ui.home.HomeScreen
+import com.northstarfit.ui.theme.NorthStarFitTheme
+import com.northstarfit.ui.workout.WorkoutScreen
 
 /**
- * This class is the main title screen of the app holding all other class types
- * @author Tyler Bibus
- *
+ * Single-activity Compose app. Navigation between screens is handled by
+ * Navigation Compose instead of separate activities.
  */
 class MainActivity : ComponentActivity() {
 
-    private lateinit var btWorkout: Button
-    private lateinit var btFoodLog: Button
-    private lateinit var btStore: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_layout)
-
-        //assigns buttons
-        btWorkout = findViewById(R.id.btStartWorkout)
-        btFoodLog = findViewById(R.id.btFoodLog)
-        btStore = findViewById(R.id.btStore)
-
-        //starts a workout
-        btWorkout.setOnClickListener{
-            val workoutIntent = Intent(this, WorkoutActivity::class.java)
-            startActivity(workoutIntent)
-        }
-
-        //starts food log activity
-        btFoodLog.setOnClickListener{
-            val foodIntent = Intent(this, FoodLogActivity::class.java)
-            startActivity(foodIntent)
+        enableEdgeToEdge()
+        setContent {
+            NorthStarFitTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "home") {
+                        composable("home") {
+                            HomeScreen(
+                                onStartWorkout = { navController.navigate("workout") },
+                                onOpenHistory = { navController.navigate("history") },
+                            )
+                        }
+                        composable("workout") {
+                            WorkoutScreen(
+                                onFinished = { navController.popBackStack() },
+                            )
+                        }
+                        composable("history") {
+                            HistoryScreen(
+                                onBack = { navController.popBackStack() },
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
