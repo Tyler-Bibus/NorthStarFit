@@ -29,6 +29,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -36,6 +37,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -73,6 +75,7 @@ fun WorkoutScreen(
     val exercises by viewModel.exercises.collectAsState()
     val restTimer by viewModel.restTimer.collectAsState()
     val restDuration by viewModel.restDurationSeconds.collectAsState()
+    val restTimerEnabled by viewModel.restTimerEnabled.collectAsState()
 
     var editMode by rememberSaveable { mutableStateOf(false) }
     var showPicker by remember { mutableStateOf(false) }
@@ -118,8 +121,10 @@ fun WorkoutScreen(
                 totals = totals,
                 restTimer = restTimer,
                 restDuration = restDuration,
+                restTimerEnabled = restTimerEnabled,
                 finishEnabled = !saving && !editMode,
                 onSetRestDuration = viewModel::setRestDuration,
+                onSetRestTimerEnabled = viewModel::setRestTimerEnabled,
                 onStartRest = viewModel::startRestTimer,
                 onSkipRest = viewModel::skipRestTimer,
                 onFinish = { showFinishDialog = true },
@@ -412,8 +417,10 @@ private fun WorkoutBottomBar(
     totals: WorkoutTotals,
     restTimer: RestTimer?,
     restDuration: Int,
+    restTimerEnabled: Boolean,
     finishEnabled: Boolean,
     onSetRestDuration: (Int) -> Unit,
+    onSetRestTimerEnabled: (Boolean) -> Unit,
     onStartRest: () -> Unit,
     onSkipRest: () -> Unit,
     onFinish: () -> Unit,
@@ -462,10 +469,11 @@ private fun WorkoutBottomBar(
                         },
                         label = {
                             Text(
-                                if (restTimer != null) {
-                                    "${formatSeconds(restTimer.remainingSeconds)} · skip"
-                                } else {
-                                    "Rest ${formatSeconds(restDuration)}"
+                                when {
+                                    restTimer != null ->
+                                        "${formatSeconds(restTimer.remainingSeconds)} · skip"
+                                    !restTimerEnabled -> "Rest off"
+                                    else -> "Rest ${formatSeconds(restDuration)}"
                                 }
                             )
                         },
@@ -474,6 +482,17 @@ private fun WorkoutBottomBar(
                         expanded = durationMenuOpen,
                         onDismissRequest = { durationMenuOpen = false },
                     ) {
+                        DropdownMenuItem(
+                            text = { Text("Auto rest timer") },
+                            trailingIcon = {
+                                Switch(
+                                    checked = restTimerEnabled,
+                                    onCheckedChange = onSetRestTimerEnabled,
+                                )
+                            },
+                            onClick = { onSetRestTimerEnabled(!restTimerEnabled) },
+                        )
+                        HorizontalDivider()
                         listOf(30, 60, 90, 120, 180).forEach { seconds ->
                             DropdownMenuItem(
                                 text = { Text(formatSeconds(seconds)) },

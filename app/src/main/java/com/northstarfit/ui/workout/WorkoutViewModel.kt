@@ -102,10 +102,19 @@ class WorkoutViewModel(private val repository: WorkoutRepository) : ViewModel() 
     private val _restDurationSeconds = MutableStateFlow(90)
     val restDurationSeconds: StateFlow<Int> = _restDurationSeconds.asStateFlow()
 
+    private val _restTimerEnabled = MutableStateFlow(true)
+    val restTimerEnabled: StateFlow<Boolean> = _restTimerEnabled.asStateFlow()
+
     private var restJob: Job? = null
 
     fun setRestDuration(seconds: Int) {
         _restDurationSeconds.value = seconds.coerceIn(15, 600)
+    }
+
+    /** Turning the timer off also stops any countdown already running. */
+    fun setRestTimerEnabled(enabled: Boolean) {
+        _restTimerEnabled.value = enabled
+        if (!enabled) skipRestTimer()
     }
 
     fun startRestTimer() {
@@ -245,7 +254,7 @@ class WorkoutViewModel(private val repository: WorkoutRepository) : ViewModel() 
             })
         }
         persistDraft()
-        if (nowDone) startRestTimer()
+        if (nowDone && _restTimerEnabled.value) startRestTimer()
     }
 
     // ---- Finishing ----
