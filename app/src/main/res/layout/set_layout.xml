@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvExcercise"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etSetWeight"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:hint="weight"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/tvExcercise"
+        app:layout_constraintStart_toEndOf="@+id/tvExcercise"
+        app:layout_constraintTop_toTopOf="@+id/tvExcercise"
+        app:layout_constraintVertical_bias="0.541" />
+
+    <EditText
+        android:id="@+id/etSetReps"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:hint="reps"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/etSetWeight"
+        app:layout_constraintStart_toEndOf="@+id/etSetWeight"
+        app:layout_constraintTop_toTopOf="@+id/etSetWeight"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/btDeleteSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:accessibilityHeading="false"
+        android:src="@android:drawable/ic_delete"
+        android:contentDescription="Delete Button"
+        app:layout_constraintBottom_toBottomOf="@+id/etSetReps"
+        app:layout_constraintStart_toEndOf="@+id/etSetReps"
+        app:layout_constraintTop_toTopOf="@+id/etSetReps"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

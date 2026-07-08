@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movements">
+        <item>Bench press</item>
+        <item>Deadlift</item>
+        <item>Squat</item>
+        <item>Bent Row</item>
+    </string-array>
+</resources>
