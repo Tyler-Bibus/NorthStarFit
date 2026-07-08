@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         ExerciseEntity::class,
         DraftEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class WorkoutDatabase : RoomDatabase() {
@@ -45,6 +45,14 @@ abstract class WorkoutDatabase : RoomDatabase() {
             }
         }
 
+        /** v2 -> v3: exercises gain muscle tags, workouts gain a name. */
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `exercises` ADD COLUMN `muscles` TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE `workouts` ADD COLUMN `name` TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
         fun getInstance(context: Context): WorkoutDatabase =
             instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(
@@ -52,7 +60,7 @@ abstract class WorkoutDatabase : RoomDatabase() {
                     WorkoutDatabase::class.java,
                     "northstarfit.db",
                 )
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
                     .also { instance = it }
             }

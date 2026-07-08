@@ -15,6 +15,7 @@ import androidx.navigation.navArgument
 import com.northstarfit.ui.history.HistoryScreen
 import com.northstarfit.ui.history.WorkoutDetailScreen
 import com.northstarfit.ui.home.HomeScreen
+import com.northstarfit.ui.progress.ProgressScreen
 import com.northstarfit.ui.theme.NorthStarFitTheme
 import com.northstarfit.ui.workout.WorkoutScreen
 
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onStartWorkout = { navController.navigate("workout") },
                                 onOpenHistory = { navController.navigate("history") },
+                                onOpenProgress = { navController.navigate("progress") },
                             )
                         }
                         composable("workout") {
@@ -49,6 +51,11 @@ class MainActivity : ComponentActivity() {
                                 onOpenWorkout = { workoutId ->
                                     navController.navigate("history/$workoutId")
                                 },
+                            )
+                        }
+                        composable("progress") {
+                            ProgressScreen(
+                                onBack = { navController.popBackStack() },
                             )
                         }
                         composable(

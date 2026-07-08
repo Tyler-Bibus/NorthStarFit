@@ -20,6 +20,13 @@ interface ExerciseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(exercises: List<ExerciseEntity>)
 
+    /**
+     * Fills in muscle data for exercises that predate the muscles column
+     * (seeded rows from schema v2). Only touches rows still blank.
+     */
+    @Query("UPDATE exercises SET muscles = :muscles WHERE name = :name AND muscles = ''")
+    suspend fun backfillMuscles(name: String, muscles: String)
+
     @Delete
     suspend fun delete(exercise: ExerciseEntity)
 }

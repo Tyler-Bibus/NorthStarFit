@@ -1,5 +1,6 @@
 package com.northstarfit.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -18,6 +19,8 @@ data class WorkoutEntity(
     val startedAt: Long,
     /** Epoch millis when the workout was finished. */
     val endedAt: Long,
+    /** User-given name (e.g. "Push day"); empty means unnamed. */
+    @ColumnInfo(defaultValue = "") val name: String = "",
 )
 
 /** One exercise performed within a workout (e.g. "Bench press"). */
@@ -67,7 +70,12 @@ data class SetEntity(
 data class ExerciseEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
-)
+    /** Comma-separated muscle groups this exercise activates. */
+    @ColumnInfo(defaultValue = "") val muscles: String = "",
+) {
+    val muscleList: List<String>
+        get() = muscles.split(',').map { it.trim() }.filter { it.isNotEmpty() }
+}
 
 /**
  * Snapshot of the in-progress workout, saved as JSON on every edit so a
