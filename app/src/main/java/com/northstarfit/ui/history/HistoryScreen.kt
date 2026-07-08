@@ -40,6 +40,7 @@ private val dateFormatter: DateTimeFormatter =
 @Composable
 fun HistoryScreen(
     onBack: () -> Unit,
+    onOpenWorkout: (Long) -> Unit,
     viewModel: HistoryViewModel = viewModel(factory = HistoryViewModel.Factory),
 ) {
     val workouts by viewModel.workouts.collectAsState()
@@ -80,6 +81,7 @@ fun HistoryScreen(
                 items(workouts, key = { it.workout.id }) { workout ->
                     WorkoutHistoryCard(
                         workout = workout,
+                        onClick = { onOpenWorkout(workout.workout.id) },
                         onDelete = { viewModel.deleteWorkout(workout) },
                     )
                 }
@@ -91,9 +93,10 @@ fun HistoryScreen(
 @Composable
 private fun WorkoutHistoryCard(
     workout: WorkoutWithMovements,
+    onClick: () -> Unit,
     onDelete: () -> Unit,
 ) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

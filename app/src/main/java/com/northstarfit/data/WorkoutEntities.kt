@@ -59,6 +59,28 @@ data class SetEntity(
     val reps: Int,
 )
 
+/**
+ * An exercise the user can pick when logging (e.g. "Bench press").
+ * Seeded with a default list on first launch; users can add their own.
+ */
+@Entity(tableName = "exercises", indices = [Index(value = ["name"], unique = true)])
+data class ExerciseEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val name: String,
+)
+
+/**
+ * Snapshot of the in-progress workout, saved as JSON on every edit so a
+ * half-finished workout survives the app being killed. At most one row
+ * (id is fixed to 1); finishing or discarding the workout deletes it.
+ */
+@Entity(tableName = "workout_drafts")
+data class DraftEntity(
+    @PrimaryKey val id: Int = 1,
+    val startedAt: Long,
+    val movementsJson: String,
+)
+
 /** A movement together with all of its sets, as read back from the database. */
 data class MovementWithSets(
     @Embedded val movement: MovementEntity,

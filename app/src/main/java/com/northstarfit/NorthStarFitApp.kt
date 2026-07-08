@@ -12,6 +12,7 @@ import com.northstarfit.data.WorkoutRepository
 class NorthStarFitApp : Application() {
 
     val repository: WorkoutRepository by lazy {
-        WorkoutRepository(WorkoutDatabase.getInstance(this).workoutDao())
+        val db = WorkoutDatabase.getInstance(this)
+        WorkoutRepository(db.workoutDao(), db.exerciseDao())
     }
 }

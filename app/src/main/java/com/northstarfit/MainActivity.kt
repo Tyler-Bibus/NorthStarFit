@@ -7,10 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.northstarfit.ui.history.HistoryScreen
+import com.northstarfit.ui.history.WorkoutDetailScreen
 import com.northstarfit.ui.home.HomeScreen
 import com.northstarfit.ui.theme.NorthStarFitTheme
 import com.northstarfit.ui.workout.WorkoutScreen
@@ -42,6 +45,18 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("history") {
                             HistoryScreen(
+                                onBack = { navController.popBackStack() },
+                                onOpenWorkout = { workoutId ->
+                                    navController.navigate("history/$workoutId")
+                                },
+                            )
+                        }
+                        composable(
+                            "history/{workoutId}",
+                            arguments = listOf(navArgument("workoutId") { type = NavType.LongType }),
+                        ) { entry ->
+                            WorkoutDetailScreen(
+                                workoutId = entry.arguments?.getLong("workoutId") ?: 0L,
                                 onBack = { navController.popBackStack() },
                             )
                         }

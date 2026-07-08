@@ -8,6 +8,7 @@ activityCompose = "1.9.3"
 composeBom = "2024.12.01"
 navigationCompose = "2.8.5"
 room = "2.7.1"
+kotlinxSerializationJson = "1.7.3"
 junit = "4.13.2"
 junitExt = "1.2.1"
 espressoCore = "3.6.1"
@@ -28,6 +29,7 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitExt" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -38,4 +40,5 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

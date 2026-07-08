@@ -3,6 +3,7 @@ package com.northstarfit.data
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,19 @@ interface WorkoutDao {
     @Transaction
     @Query("SELECT * FROM workouts ORDER BY startedAt DESC")
     fun observeWorkouts(): Flow<List<WorkoutWithMovements>>
+
+    @Transaction
+    @Query("SELECT * FROM workouts WHERE id = :workoutId")
+    fun observeWorkout(workoutId: Long): Flow<WorkoutWithMovements?>
+
+    @Query("SELECT * FROM workout_drafts WHERE id = 1")
+    suspend fun getDraft(): DraftEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsertDraft(draft: DraftEntity)
+
+    @Query("DELETE FROM workout_drafts")
+    suspend fun clearDraft()
 
     /**
      * Persists a finished workout with all of its movements and sets in a
